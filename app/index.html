@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,25 +9,9 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-</head>
-<body>
-  <ul class="menu">
-    <li><a href="#!/view1">view1</a></li>
-    <li><a href="#!/view2">view2</a></li>
-  </ul>
 
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-
-  <div ng-view></div>
-
-  <div>Angular seed app: v<span app-version></span></div>
-
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
   <script src="bower_components/angular/angular.js"></script>
+  <script src="scripts/jquery.min.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
   <script src="view1/view1.js"></script>
@@ -39,5 +19,49 @@
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
+
+  <script type="text/javascript" src="scripts/highcharts/js/highcharts.js"></script>
+  <script type="text/javascript" src="scripts/highcharts/js/modules/exporting.js"></script>
+  <script src="http://code.highcharts.com/modules/offline-exporting.js"></script>
+  <script type="text/javascript" src="scripts/highcharts/js/highcharts-more.js"></script>
+  <script type="text/javascript" src="scripts/highcharts/js/modules/solid-gauge.js"></script>
+  <script type="text/javascript" src="scripts/highcharts/js/modules/data.js"></script>
+  <script type="text/javascript" src="scripts/highcharts-ng/dist/highcharts-ng.min.js"></script>
+  <script type="text/javascript" src="scripts/services/chartServices.js"></script>
+  <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
+
+
+</head>
+<body ng-app="myApp" ng-controller="myController">
+
+  <div>
+    <input type="text" ng-model="message"/>
+    <br/><br/>
+    {{ message}}
+  </div>
+
+
+  <!--high charts start-->
+  <highchart config="chartConfig"></highchart>
+
+<button type="button" id="downloadImage" ng-click="downloadImages()">Download image Online</button>
+  <button type="button" id="downloadImageOffline" ng-click="downloadImagesOffline()">Download image Offline</button>
+
+  <div id="container"></div>
+
+
+  <canvas width="500" height="300" id="canvas">Sorry, no canvas available</canvas>
+  <a id="download">Download as image</a>
+
+  <!--high charts end-->
+
+
+  <!--extjs start-->
+
+
+  <!--extjs end-->
+
+
+
 </body>
 </html>
