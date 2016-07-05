@@ -339,7 +339,6 @@ chartServices.factory('chartsManager',function($timeout){
 
         //drawing some charts
         drawChart : function(analyticsObject,xAxisType,xAxisItems,yAxisType,yAxisItems,filterType,filterUid,title,type) {
-            console.log("analyis",analyticsObject)
             if(type.indexOf('chart.')==-1) {
                 type='chart.'+type;
             }

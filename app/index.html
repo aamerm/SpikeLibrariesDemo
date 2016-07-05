@@ -12,6 +12,8 @@
 
   <script src="bower_components/angular/angular.js"></script>
   <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/FileSaver.min.js"></script>
+  <script src="scripts/jquery.wordexport.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
   <script src="view1/view1.js"></script>
@@ -30,6 +32,18 @@
   <script type="text/javascript" src="scripts/services/chartServices.js"></script>
   <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
 
+  <script type="text/javascript" src="http://gabelerner.github.io/canvg/rgbcolor.js"></script>
+  <script type="text/javascript" src="http://gabelerner.github.io/canvg/StackBlur.js"></script>
+  <script type="text/javascript" src="http://gabelerner.github.io/canvg/canvg.js"></script>
+
+
+  <script type="text/javascript">
+    jQuery(document).ready(function($) {
+      $("a.word-export").click(function(event) {
+        $("#page-content").wordExport();
+      });
+    });
+  </script>
 
 </head>
 <body ng-app="myApp" ng-controller="myController">
@@ -40,27 +54,41 @@
     {{ message}}
   </div>
 
+  <form>
+    <label for="hconline">High Charts Online</label>
+    <input id="hconline" type="radio" name="hconline" ng-model="typeOfExport" value="hconline">
+    <br />
+    <label for="hcoffline">High Charts Offline</label>
+    <input id="hcoffline" type="radio" name="hcoffline" ng-model="typeOfExport" value="hcoffline">
+    <br />
+    <label for="usingcanvas">Canvas</label>
+    <input id="usingcanvas" type="radio" name="usingcanvas" ng-model="typeOfExport" value="usingcanvas">
+    <br />
+    <label for="usingextjs">Extjs</label>
+    <input id="usingextjs" type="radio" name="usingextjs" ng-model="typeOfExport" value="usingextjs">
+  </form>
 
-  <!--high charts start-->
-  <highchart config="chartConfig"></highchart>
+  <div>
+    <div ng-show="typeOfExport == 'hconline'">
+      <highchart id= "highChartImage" config="highChartsObject"></highchart>
 
-<button type="button" id="downloadImage" ng-click="downloadImages()">Download image Online</button>
-  <button type="button" id="downloadImageOffline" ng-click="downloadImagesOffline()">Download image Offline</button>
+      <button type="button" id="downloadImage" ng-click="downloadImages()">Download image Online</button>
+      <div id="image1"></div>
+      <button type="button" ng-click="exportWord()">Export to Word</button>
+    </div>
+    <div ng-show="typeOfExport == 'hcoffline'">
+      <highchart id= "highChartImage" config="highChartsObject"></highchart>
+      <canvas width="500" height="300" id="highChartCanvas" ng-show="false"></canvas>
+      <button type="button" id="downloadImageOffline" ng-click="downloadImagesOffline()">Download image Offline</button>
+    </div>
+    <div ng-show="typeOfExport == 'usingcanvas'">
+      <canvas width="500" height="300" id="canvas">Sorry, no canvas available</canvas>
+      <a id="download">Download as image</a>
+    </div>
+    <div ng-show="typeOfExport == 'usingextjs'">
 
-  <div id="container"></div>
-
-
-  <canvas width="500" height="300" id="canvas">Sorry, no canvas available</canvas>
-  <a id="download">Download as image</a>
-
-  <!--high charts end-->
-
-
-  <!--extjs start-->
-
-
-  <!--extjs end-->
-
+    </div>
+  </div>
 
 
 </body>
